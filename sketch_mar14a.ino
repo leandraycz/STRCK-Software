@@ -58,7 +58,7 @@ unsigned char SR;        //state of right sensor
 //Informace
 String developerName = "Radim Krejcirik";
 String year = "2023";
-String version = "0.2 beta";
+String version = "0.3 beta";
 
 void MoveForward(){  //Posune želvu dopředu
   digitalWrite(MOTOR_PIN_1,HIGH);
@@ -261,6 +261,57 @@ void loop(){
       digitalWrite(MOTOR_PIN_4,LOW); 
       Serial.println("Mode has been changed to 3");          
     }
+
+    else if(input.equals("mode 4")){ //Změní herní mód na 4(Vyhýbání se překážkám doprava)
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW);
+      delay(500);
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW); 
+      delay(500);
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW);
+      delay(500);
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW);
+      digitalWrite(MOTOR_PIN_1,LOW);
+      digitalWrite(MOTOR_PIN_2,LOW);
+      digitalWrite(MOTOR_PIN_3,LOW);
+      digitalWrite(MOTOR_PIN_4,LOW);
+      Serial.println("Mode has been changed to 4"); 
+    }
+
+    else if(input.equals("mode 5")){ //Mění herní mód na 5(Vyhýbání se překážkám doleva)
+      mode = 5;
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW);
+      delay(500);
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW); 
+      delay(500);
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW);
+      delay(500);
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW);  
+      delay(500);
+      digitalWrite(LED_BUILTIN, HIGH);
+      delay(500);
+      digitalWrite(LED_BUILTIN, LOW);  
+      digitalWrite(MOTOR_PIN_1,LOW);
+      digitalWrite(MOTOR_PIN_2,LOW);
+      digitalWrite(MOTOR_PIN_3,LOW);
+      digitalWrite(MOTOR_PIN_4,LOW); 
+      Serial.println("Mode has been changed to 5"); 
+    }
     
     else if(input.equals("mode")){ //Vypíše aktuální herní mód
       Serial.print("Actual mode: ");
@@ -273,9 +324,9 @@ void loop(){
       Serial.println("servo right - move servo to right direction.          mode 1 - change mode to 1.");
       Serial.println("servo position - show servo position.                 mode 2 - change mode to 2.");
       Serial.println("us distance - show distance from ultrasonic sensor.   mode 3 - change mode to 3.");
-      Serial.println("ir last - show last value received by IR receiver.    mode - show actual mode.");      
-      Serial.println("move forward - moves the turtle forward."); 
-      Serial.println("move left - moves the turtle left.");
+      Serial.println("ir last - show last value received by IR receiver.    mode 4 - change mode to 4.");      
+      Serial.println("move forward - moves the turtle forward.              mode 5 - change mode to 5."); 
+      Serial.println("move left - moves the turtle left.                    mode - show actual mode.");
       Serial.println("move right - moves the turtle right.");     
       Serial.println("move back - moves the turtle back.");
       Serial.println("-------------------------------------------------------------------------------------");
@@ -364,7 +415,54 @@ void loop(){
         digitalWrite(MOTOR_PIN_2,LOW);
         digitalWrite(MOTOR_PIN_3,LOW);
         digitalWrite(MOTOR_PIN_4,LOW);
-        break;                           
+        break; 
+      case IR_4:  //Tlačítko 4
+        mode = 4;
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(500);
+        digitalWrite(LED_BUILTIN, LOW);
+        delay(500);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(500);
+        digitalWrite(LED_BUILTIN, LOW); 
+        delay(500);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(500);
+        digitalWrite(LED_BUILTIN, LOW);
+        delay(500);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(500);
+        digitalWrite(LED_BUILTIN, LOW);
+        digitalWrite(MOTOR_PIN_1,LOW);
+        digitalWrite(MOTOR_PIN_2,LOW);
+        digitalWrite(MOTOR_PIN_3,LOW);
+        digitalWrite(MOTOR_PIN_4,LOW);
+        break;  
+      case IR_5:  //Tlačítko 5
+        mode = 5;
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(500);
+        digitalWrite(LED_BUILTIN, LOW);
+        delay(500);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(500);
+        digitalWrite(LED_BUILTIN, LOW); 
+        delay(500);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(500);
+        digitalWrite(LED_BUILTIN, LOW);
+        delay(500);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(500);
+        digitalWrite(LED_BUILTIN, LOW);  
+        delay(500);
+        digitalWrite(LED_BUILTIN, HIGH);
+        delay(500);
+        digitalWrite(LED_BUILTIN, LOW);  
+        digitalWrite(MOTOR_PIN_1,LOW);
+        digitalWrite(MOTOR_PIN_2,LOW);
+        digitalWrite(MOTOR_PIN_3,LOW);
+        digitalWrite(MOTOR_PIN_4,LOW);                    
     }    
     IR_Receiver.resume();    
   }
@@ -417,6 +515,46 @@ void loop(){
         digitalWrite(MOTOR_PIN_3,HIGH);
         digitalWrite(MOTOR_PIN_4,HIGH); 
       }
+    }
+  }
+
+  if(mode.equals("4")){
+    if(UltraSonic.Distance() < 10){
+      digitalWrite(MOTOR_PIN_1,LOW);
+      digitalWrite(MOTOR_PIN_2,HIGH);
+      digitalWrite(MOTOR_PIN_3,HIGH);
+      digitalWrite(MOTOR_PIN_4,LOW);
+      delay(500);
+      digitalWrite(MOTOR_PIN_1,HIGH);
+      digitalWrite(MOTOR_PIN_2,LOW);
+      digitalWrite(MOTOR_PIN_3,HIGH);
+      digitalWrite(MOTOR_PIN_4,LOW);
+      delay(500);
+    }else{
+      digitalWrite(MOTOR_PIN_1,HIGH);
+      digitalWrite(MOTOR_PIN_2,LOW);
+      digitalWrite(MOTOR_PIN_3,LOW);
+      digitalWrite(MOTOR_PIN_4,HIGH);
+    }
+  }
+
+  if(mode.equals("5")){
+    if(UltraSonic.Distance() < 10){
+      digitalWrite(MOTOR_PIN_1,LOW);
+      digitalWrite(MOTOR_PIN_2,HIGH);
+      digitalWrite(MOTOR_PIN_3,HIGH);
+      digitalWrite(MOTOR_PIN_4,LOW);
+      delay(500);
+      digitalWrite(MOTOR_PIN_1,LOW);
+      digitalWrite(MOTOR_PIN_2,HIGH);
+      digitalWrite(MOTOR_PIN_3,LOW);
+      digitalWrite(MOTOR_PIN_4,HIGH);
+      delay(500);
+    }else{
+      digitalWrite(MOTOR_PIN_1,HIGH);
+      digitalWrite(MOTOR_PIN_2,LOW);
+      digitalWrite(MOTOR_PIN_3,LOW);
+      digitalWrite(MOTOR_PIN_4,HIGH);
     }
   }
 }
