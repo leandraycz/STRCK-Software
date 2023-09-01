@@ -35,4 +35,4 @@ URFO1 - Utrasonický modul (z leva)
 
 # Ovládání
 Program se ovládání pomoci dálkového IR ovladače dodávaného ke stavebnici nebo pomoci USB portu(pokročilí uživatelé). 
-Tlačítko 1 až 3 přepíná herní módy. Tlačítka šipek slouží k ovládání pohybu stavebnice (herní mód 2), ovládání serva (herní mód 1). V herním módu 3 se program řidí pomocí Line tracking sensoru na spodní straně stavebnice.
+Tlačítko 1 až 5 přepíná herní módy. Tlačítka šipek slouží k ovládání pohybu stavebnice (herní mód 2), ovládání serva (herní mód 1). V herním módu 3 se program řidí pomocí Line tracking sensoru na spodní straně stavebnice. V herním módu 4 se stavebnice vyhýbá překážkám doprava. V herním módu 5 se stavebnice vyhýbá překážkám doleva.
